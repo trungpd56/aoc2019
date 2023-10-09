@@ -8,6 +8,7 @@ class Console:
     def __init__(self, line, inp):
         self.insts = [int(n) for n in line.strip().split(",")]
         self.inp = inp
+        self.output = []
 
     def run(self):
         eip = 0
@@ -31,7 +32,7 @@ class Console:
                     eip += 2
                 case "04":
                     a1 = self.insts[eip + 1]
-                    print(self.insts[a1])
+                    self.output.append(self.insts[a1])
                     eip += 2
                 case "05":
                     a1, a2 = self.insts[eip + 1 : eip + 3]
@@ -70,19 +71,19 @@ def part1(data):
     """Solve part 1."""
     console = Console(data, 1)
     console.run()
+    return console.output[-1]
 
 
 def part2(data):
     """Solve part 2."""
     console = Console(data, 5)
     console.run()
+    return console.output[-1]
 
 
 def solve(puzzle_input):
     """Solve the puzzle for the given input."""
-    print("Part1")
     solution1 = part1(puzzle_input)
-    print("\nPart2")
     solution2 = part2(puzzle_input)
 
     return solution1, solution2
